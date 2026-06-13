@@ -818,7 +818,7 @@ display: none;
 @media (max-width:767px)
 {
 .portfolio .portfolio-item,
-.service.service-item,
+.service .service-item,
 .contact .contact-form .col-6,
 .about .about-content .experience, 
 .about .about-content .education, 
