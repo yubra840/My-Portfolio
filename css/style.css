@@ -297,16 +297,16 @@ h3.my-profession{
     width: 80px;
      border-bottom: 10px solid var(--skin-color);
     border-right: 10px solid var(--skin-color);
-    right: 20px;
-    bottom: -40px;
+    right: 50px;
+    bottom: -20px;
    
 
 }
 .home-img::before{
     content: '';
     position: absolute;
-    left: -20px;
-    top: -40px;
+    left: -10px;
+    top: -20px;
     width: 80px;
     height: 80px;
     border-top: 10px solid var(--skin-color);
