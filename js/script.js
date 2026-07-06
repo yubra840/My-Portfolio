@@ -92,15 +92,24 @@ contactForm.addEventListener("submit", function (e) {
 
   emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, templateParams).then(
     function () {
-      formStatus.style.color = "green";
-      formStatus.textContent = "Message sent successfully! I'll get back to you soon.";
+      formStatus.style.fontWeight = "bold";
+      formStatus.style.padding = "10px";
+      formStatus.style.borderRadius = "10px";
+      formStatus.style.textAlign = "center";
+      formStatus.style.background = "lightgreen";
+      formStatus.textContent = "Message sent successfully✅ I'll get back to you soon.";
       contactForm.reset();
       submitBtn.disabled = false;
       submitBtn.textContent = originalText;
     },
     function (error) {
       formStatus.style.color = "red";
-      formStatus.textContent = "Something went wrong. Please try again or email me directly.";
+      formStatus.style.borderRadius = "10px";
+      formStatus.style.fontWeight = "bold";
+      formStatus.style.padding = "10px";
+      formStatus.style.textAlign = "center";
+      formStatus.style.background = "lightcoral";
+      formStatus.textContent = "Something went wrong❌. Please try again or email me directly.";
       submitBtn.disabled = false;
       submitBtn.textContent = originalText;
       console.error("EmailJS error:", error);
