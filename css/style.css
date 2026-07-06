@@ -288,6 +288,7 @@ h3.my-profession{
     display: flex;
     align-items: center;
     position: relative;
+   
 }
 .home-img::after{
     content: '';
@@ -314,8 +315,9 @@ h3.my-profession{
 }
 .home .home-img img{
     height: 400px;
-    margin: auto;
+    width: 300px;
     border-radius: 5px;
+
 }
 .about .about-content{
     flex: 0 0 100%;

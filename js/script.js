@@ -57,17 +57,53 @@ function closeSidebar() {
 }
 
 
-document.getElementById("contactForm").addEventListener("submit", function(e) {
+/* ========== EmailJS contact form ========== */
+// 1. Sign up free at https://www.emailjs.com
+// 2. Add an Email Service (e.g. Gmail) -> copy the Service ID
+// 3. Create an Email Template using variables {{from_name}}, {{from_email}}, {{subject}}, {{message}} -> copy the Template ID
+// 4. Account > General -> copy your Public Key
+// 5. Paste all three values below.
+
+const EMAILJS_PUBLIC_KEY = "3J0UNNCXaqzJoqDP4";
+const EMAILJS_SERVICE_ID = "service_17kph5q";
+const EMAILJS_TEMPLATE_ID = "template_ips3kih";
+
+emailjs.init(EMAILJS_PUBLIC_KEY);
+
+const contactForm = document.getElementById("contactForm");
+const formStatus = document.getElementById("formStatus");
+
+contactForm.addEventListener("submit", function (e) {
   e.preventDefault();
 
-  const name = this.name.value;
-  const email = this.email.value;
-  const subject = this.subject.value || "New Contact Message";
-  const message = this.message.value;
+  const submitBtn = contactForm.querySelector("button[type='submit']");
+  const originalText = submitBtn.textContent;
 
-  const mailtoLink = `mailto:yubraotieno@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(
-    `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`
-  )}`;
+  const templateParams = {
+    name: this.name.value,
+    from_email: this.email.value,
+    subject: this.subject.value || "New Contact Message",
+    message: this.message.value,
+  };
 
-  window.location.href = mailtoLink;
+  submitBtn.disabled = true;
+  submitBtn.textContent = "Sending...";
+  formStatus.textContent = "";
+
+  emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, templateParams).then(
+    function () {
+      formStatus.style.color = "green";
+      formStatus.textContent = "Message sent successfully! I'll get back to you soon.";
+      contactForm.reset();
+      submitBtn.disabled = false;
+      submitBtn.textContent = originalText;
+    },
+    function (error) {
+      formStatus.style.color = "red";
+      formStatus.textContent = "Something went wrong. Please try again or email me directly.";
+      submitBtn.disabled = false;
+      submitBtn.textContent = originalText;
+      console.error("EmailJS error:", error);
+    }
+  );
 });
